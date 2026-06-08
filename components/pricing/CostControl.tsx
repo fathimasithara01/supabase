@@ -8,106 +8,78 @@ export function CostControl() {
   const [spendCapOn, setSpendCapOn] = useState(true);
 
   return (
-    <section className="bg-background py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
-      <div className="mx-auto max-w-5xl">
+    <section className="cost-control">
+      <div className="cost-control__inner">
         
         {/* Headings */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold font-sans text-white tracking-tight">
-            Fine-tune your project
-          </h2>
-          <p className="mt-3 text-zinc-400 text-sm max-w-xl mx-auto">
+        <div className="compute-pricing__header">
+          <h2 className="compute-pricing__title">Fine-tune your project</h2>
+          <p className="compute-pricing__subtitle">
             Go beyond your Plan limits and level up your Supabase experience
           </p>
         </div>
 
         {/* Cost Control Toggle Card */}
-        <div className="rounded-xl border border-zinc-800 bg-panel-bg p-6 sm:p-8 mb-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="cost-control__card">
+          <div className="cost-control__grid">
             
             {/* Visual Column */}
-            <div className="lg:col-span-5 rounded-lg border border-card-border bg-card-bg p-6 flex flex-col items-center">
-              
-              {/* Spend Cap Toggle */}
-              <div className="flex items-center justify-between w-full border-b border-zinc-900 pb-4 mb-6">
-                <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">
-                  Spend Cap Status
-                </span>
-                
+            <div className="cost-control__visual">
+              <div className="cost-toggle">
+                <span className="compute-calculator__label mb-0">Spend Cap Status</span>
                 <button
                   onClick={() => setSpendCapOn(!spendCapOn)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors outline-none cursor-pointer ${
-                    spendCapOn ? "bg-brand" : "bg-zinc-850 border border-zinc-800"
-                  }`}
+                  className={`cost-toggle__switch ${spendCapOn ? "cost-toggle__switch--on" : "cost-toggle__switch--off"}`}
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
-                      spendCapOn ? "translate-x-6" : "translate-x-1"
-                    }`}
-                  />
+                  <span className={`cost-toggle__thumb ${spendCapOn ? "translate-x-6" : "translate-x-1"}`} />
                 </button>
               </div>
 
-              {/* Dynamic Chart Visual */}
-              <div className="w-full flex flex-col gap-2">
-                <div className="flex justify-between text-[10px] text-zinc-500 font-bold uppercase">
-                  <span>Usage Scale</span>
+              {/* Chart Visual */}
+              <div className="cost-chart">
+                <div className="flex justify-between text-[10px] font-bold uppercase">
+                  <span className="text-zinc-500">Usage Scale</span>
                   <span className={spendCapOn ? "text-brand" : "text-amber-400"}>
                     {spendCapOn ? "Capped at $25" : "Pay As You Go"}
                   </span>
                 </div>
                 
-                {/* Bar indicators */}
-                <div className="h-24 w-full flex items-end justify-between gap-2 border-b border-zinc-855 pb-1 mt-2">
-                  <div className="w-full bg-brand h-[30%] rounded-t transition-all duration-300" />
-                  <div className="w-full bg-brand h-[45%] rounded-t transition-all duration-300" />
-                  <div className="w-full bg-brand h-[65%] rounded-t transition-all duration-300" />
-                  <div className="w-full h-[85%] rounded-t transition-all duration-500 overflow-hidden bg-zinc-900 relative">
-                    <div
-                      className={`absolute bottom-0 w-full rounded-t transition-all duration-500 ${
-                        spendCapOn ? "bg-brand h-[70%]" : "bg-brand h-[100%]"
-                      }`}
-                    />
-                    {spendCapOn && (
-                      <div className="absolute top-[30%] left-0 w-full border-t border-dashed border-red-500/80 z-10" />
-                    )}
-                  </div>
-                  <div className="w-full h-[95%] rounded-t transition-all duration-500 overflow-hidden bg-zinc-900 relative">
-                    <div
-                      className={`absolute bottom-0 w-full rounded-t transition-all duration-500 ${
-                        spendCapOn ? "bg-brand h-[70%]" : "bg-brand h-[100%]"
-                      }`}
-                    />
-                    {spendCapOn && (
-                      <div className="absolute top-[30%] left-0 w-full border-t border-dashed border-red-500/80 z-10" />
-                    )}
-                  </div>
+                <div className="cost-chart__bars">
+                  <div className="cost-chart__bar-item h-[30%]" />
+                  <div className="cost-chart__bar-item h-[45%]" />
+                  <div className="cost-chart__bar-item h-[65%]" />
+                  
+                  {/* Dynamic Bars */}
+                  {[85, 95].map((h, i) => (
+                    <div key={i} className={`cost-chart__bar-container h-[${h}%]`}>
+                      <div
+                        className="cost-chart__bar-item absolute bottom-0 w-full"
+                        style={{ height: spendCapOn ? "70%" : "100%" }}
+                      />
+                      {spendCapOn && <div className="cost-chart__cap-line" />}
+                    </div>
+                  ))}
                 </div>
 
                 <div className="flex justify-between text-[8px] text-zinc-600 font-mono mt-1">
-                  <span>Proj A</span>
-                  <span>Proj B</span>
-                  <span>Proj C</span>
-                  <span>Proj D</span>
-                  <span>Proj E</span>
+                  {["Proj A", "Proj B", "Proj C", "Proj D", "Proj E"].map(label => (
+                    <span key={label}>{label}</span>
+                  ))}
                 </div>
               </div>
             </div>
 
             {/* Information Column */}
             <div className="lg:col-span-7 space-y-4">
-              <span className="inline-block rounded-full bg-brand-muted border border-brand/30 px-2.5 py-0.5 text-[9px] font-bold text-brand uppercase tracking-wide">
-                Available on Pro Plan
-              </span>
-              
-              <h3 className="text-xl font-bold font-sans text-white">Cost Control</h3>
+              <span className="hero-badge mb-0 px-2.5 py-0.5 text-[9px]">Available on Pro Plan</span>
+              <h3 className="text-xl font-bold text-white">Cost Control</h3>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                The Pro Plan has a spend cap enabled by default to keep costs under control. If you want to scale beyond the plan's included quotas, simply switch off the spend cap to pay for additional resources.
+                The Pro Plan has a spend cap enabled by default to keep costs under control. Switch it off to scale beyond included quotas and pay for additional resources.
               </p>
 
-              <div className="rounded border border-card-border bg-zinc-950/40 p-3 text-xs flex gap-2">
+              <div className="compute-summary bg-black/40 border-card-border p-3 flex gap-3">
                 <ShieldCheck className="h-4 w-4 text-brand shrink-0 mt-0.5" />
-                <div>
+                <div className="text-xs leading-snug">
                   <span className="font-semibold text-white">Current status: </span>
                   <span className={spendCapOn ? "text-brand font-semibold" : "text-amber-400 font-semibold"}>
                     {spendCapOn 
@@ -118,31 +90,22 @@ export function CostControl() {
                 </div>
               </div>
 
-              <a
-                href="https://supabase.com/docs/guides/platform/spend-cap"
-                target="_blank"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-brand-hover transition-colors"
-              >
-                <span>Learn about Cost Control</span>
-                <HelpCircle className="h-3.5 w-3.5" />
+              <a href="#" className="inline-flex items-center gap-1 text-xs font-semibold text-brand">
+                Learn about Cost Control <HelpCircle className="h-3.5 w-3.5" />
               </a>
             </div>
 
           </div>
         </div>
 
-        {/* Small Add-ons grid cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Add-ons Grid */}
+        <div className="addon-grid">
           {ADDONS.map((addon) => (
-            <div
-              key={addon.id}
-              className="rounded-xl border border-card-border bg-panel-bg p-6 hover:border-panel-border transition-all flex flex-col justify-between"
-            >
+            <div key={addon.id} className="addon-card">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded bg-card-bg border border-card-border">
-                    {addon.iconName === "globe" && <Globe2 className="h-5 w-5 text-brand" />}
-                    {addon.iconName === "history" && <History className="h-5 w-5 text-brand" />}
+                  <div className="addon-card__icon">
+                    {addon.iconName === "globe" ? <Globe2 className="h-5 w-5" /> : <History className="h-5 w-5" />}
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-white">{addon.title}</h4>
@@ -150,16 +113,11 @@ export function CostControl() {
                   </div>
                 </div>
                 <div className="text-right">
-                  {addon.id === "pitr" && (
-                    <span className="text-xs text-zinc-500 uppercase font-bold tracking-wider block">From</span>
-                  )}
                   <span className="text-sm font-bold text-brand">${addon.price}</span>
-                  <span className="text-[10px] text-zinc-500">{addon.period}</span>
+                  <span className="text-[10px] text-zinc-500 block">{addon.period}</span>
                 </div>
               </div>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                {addon.description}
-              </p>
+              <p className="text-xs text-zinc-400 leading-relaxed">{addon.description}</p>
             </div>
           ))}
         </div>
