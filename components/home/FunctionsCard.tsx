@@ -36,15 +36,15 @@ export function FunctionsCard() {
   return (
     <div
       id="functions"
-      className="group relative overflow-hidden rounded-xl border border-zinc-900 bg-zinc-950/40 p-6 flex flex-col justify-between hover:border-zinc-800 transition-all duration-300 min-h-[380px]"
+      className="group relative overflow-hidden rounded-xl border border-panel-border bg-card-bg/40 p-6 flex flex-col justify-between hover:border-card-border transition-all duration-300 min-h-[380px]"
     >
       {/* Background glow */}
-      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-[80px] pointer-events-none" />
+      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-brand/5 blur-[80px] pointer-events-none" />
 
       {/* Info Header */}
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <span className="p-1.5 rounded-md bg-emerald-500/10 text-emerald-400">
+          <span className="p-1.5 rounded-md bg-brand/10 text-brand">
             <Cpu className="h-4 w-4" />
           </span>
           <h3 className="text-lg font-bold text-white tracking-tight">Edge Functions</h3>
@@ -57,8 +57,8 @@ export function FunctionsCard() {
       {/* Terminal and Globe side-by-side */}
       <div className="flex-1 flex flex-col gap-4">
         {/* Terminal Window Mockup */}
-        <div className="rounded-lg border border-zinc-900 bg-black/80 font-mono text-[9px] text-zinc-400 p-3 shadow-inner flex-1 flex flex-col justify-between min-h-[120px]">
-          <div className="flex items-center justify-between border-b border-zinc-900 pb-2 mb-2">
+        <div className="rounded-lg border border-panel-border bg-black/80 font-mono text-[9px] text-zinc-400 p-3 shadow-inner flex-1 flex flex-col justify-between min-h-[120px]">
+          <div className="flex items-center justify-between border-b border-panel-border pb-2 mb-2">
             <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-red-500/60" />
               <span className="h-2 w-2 rounded-full bg-yellow-500/60" />
@@ -67,9 +67,9 @@ export function FunctionsCard() {
             <button
               onClick={startDeployment}
               disabled={isDeploying}
-              className="flex items-center gap-1 px-1.5 py-0.5 rounded border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 hover:text-white transition-colors text-[8px] cursor-pointer disabled:opacity-50"
+              className="flex items-center gap-1 px-1.5 py-0.5 rounded border border-card-border bg-card-bg hover:bg-panel-bg hover:text-white transition-colors text-[8px] cursor-pointer disabled:opacity-50"
             >
-              <Play className="h-2 w-2 text-emerald-500" />
+              <Play className="h-2 w-2 text-brand" />
               <span>Deploy</span>
             </button>
           </div>
@@ -80,7 +80,7 @@ export function FunctionsCard() {
                 key={idx}
                 className={
                   line.startsWith("✓")
-                    ? "text-emerald-400 font-bold"
+                    ? "text-brand font-bold"
                     : line.startsWith("$")
                     ? "text-white"
                     : "text-zinc-500"
@@ -95,7 +95,7 @@ export function FunctionsCard() {
         {/* Rotating Network Globe Graphic */}
         <div className="relative h-20 flex justify-center items-center overflow-hidden">
           <svg
-            className="w-16 h-16 text-zinc-800 animate-spin-slow group-hover:text-emerald-500/30 transition-colors duration-500 pointer-events-none"
+            className="w-16 h-16 text-zinc-800 animate-spin-slow group-hover:text-brand/30 transition-colors duration-500 pointer-events-none"
             viewBox="0 0 100 100"
             fill="none"
             stroke="currentColor"
@@ -109,14 +109,14 @@ export function FunctionsCard() {
             <line x1="50" y1="5" x2="50" y2="95" />
 
             {/* Glowing Edge nodes */}
-            <circle cx="50" cy="5" r="2.5" fill="currentColor" className="text-emerald-400" />
-            <circle cx="50" cy="95" r="2.5" fill="currentColor" className="text-emerald-400" />
-            <circle cx="5" cy="50" r="2.5" fill="currentColor" className="text-emerald-400" />
-            <circle cx="95" cy="50" r="2.5" fill="currentColor" className="text-emerald-400" />
-            <circle cx="20" cy="20" r="2" fill="currentColor" className="text-emerald-500/60" />
-            <circle cx="80" cy="80" r="2" fill="currentColor" className="text-emerald-500/60" />
+            <circle cx="50" cy="5" r="2.5" fill="currentColor" className="text-brand" />
+            <circle cx="50" cy="95" r="2.5" fill="currentColor" className="text-brand" />
+            <circle cx="5" cy="50" r="2.5" fill="currentColor" className="text-brand" />
+            <circle cx="95" cy="50" r="2.5" fill="currentColor" className="text-brand" />
+            <circle cx="20" cy="20" r="2" fill="currentColor" className="text-brand/60" />
+            <circle cx="80" cy="80" r="2" fill="currentColor" className="text-brand/60" />
           </svg>
-          <span className="absolute text-[8px] font-mono font-semibold text-zinc-600 bg-zinc-950 px-1 border border-zinc-900 rounded select-none">
+          <span className="absolute text-[8px] font-mono font-semibold text-zinc-600 bg-card-bg px-1 border border-panel-border rounded select-none">
             29 Regions
           </span>
         </div>

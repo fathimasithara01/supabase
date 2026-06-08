@@ -51,7 +51,7 @@ export function Community() {
   ];
 
   return (
-    <section className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-t border-zinc-900/60 relative">
+    <section className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-t border-panel-border/60 relative">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -77,7 +77,7 @@ export function Community() {
           {testimonials.map((t, idx) => (
             <div
               key={idx}
-              className="rounded-xl border border-zinc-900 bg-zinc-950/40 p-6 flex flex-col justify-between hover:border-zinc-800 transition-all duration-300 group"
+              className="rounded-xl border border-panel-border bg-card-bg/40 p-6 flex flex-col justify-between hover:border-card-border transition-all duration-300 group"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">

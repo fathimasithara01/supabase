@@ -10,7 +10,7 @@ import { ApiCard } from "./ApiCard";
 
 export function ProductGrid() {
   return (
-    <section className="relative bg-[#030303] py-20 px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-background py-20 px-4 sm:px-6 lg:px-8">
       {/* Background radial overlays */}
       <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
 
@@ -54,7 +54,7 @@ export function ProductGrid() {
         </div>
 
         {/* Section Pre-footer message */}
-        <div className="text-center mt-12 border-t border-zinc-900/60 pt-10">
+        <div className="text-center mt-12 border-t border-panel-border/60 pt-10">
           <p className="text-base sm:text-lg text-zinc-400">
             <span className="text-white font-bold">Use one or all.</span> Best of breed products. Integrated as a platform.
           </p>

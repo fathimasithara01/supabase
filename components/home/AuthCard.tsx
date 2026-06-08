@@ -50,15 +50,15 @@ export function AuthCard() {
   return (
     <div
       id="auth"
-      className="group relative overflow-hidden rounded-xl border border-zinc-900 bg-zinc-950/40 p-6 flex flex-col justify-between hover:border-zinc-800 transition-all duration-300 min-h-[380px]"
+      className="group relative overflow-hidden rounded-xl border border-panel-border bg-card-bg/40 p-6 flex flex-col justify-between hover:border-card-border transition-all duration-300 min-h-[380px]"
     >
       {/* Background glow */}
-      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-[80px] pointer-events-none" />
+      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-brand/5 blur-[80px] pointer-events-none" />
 
       {/* Title info */}
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <span className="p-1.5 rounded-md bg-emerald-500/10 text-emerald-400">
+          <span className="p-1.5 rounded-md bg-brand/10 text-brand">
             <Lock className="h-4 w-4" />
           </span>
           <h3 className="text-lg font-bold text-white tracking-tight">Authentication</h3>
@@ -76,7 +76,7 @@ export function AuthCard() {
         {users.map((user, i) => (
           <div
             key={i}
-            className="flex items-center justify-between rounded-lg border border-zinc-900 bg-black/60 p-2.5 hover:border-zinc-800 hover:bg-zinc-900/40 transition-all duration-200"
+            className="flex items-center justify-between rounded-lg border border-panel-border bg-black/60 p-2.5 hover:border-card-border hover:bg-panel-bg/40 transition-all duration-200"
           >
             <div className="flex items-center gap-2.5">
               <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-zinc-400 uppercase">
@@ -99,7 +99,7 @@ export function AuthCard() {
               <span
                 className={`inline-flex rounded-full px-1.5 py-0.5 text-[8px] font-semibold ${
                   user.status === "active"
-                    ? "bg-emerald-500/10 text-emerald-400"
+                    ? "bg-brand/10 text-brand"
                     : user.status === "invited"
                     ? "bg-amber-500/10 text-amber-400"
                     : "bg-zinc-500/10 text-zinc-400"

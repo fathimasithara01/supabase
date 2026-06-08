@@ -46,6 +46,16 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-brand: #3ecf8e;
+  --color-brand-hover: #30b075;
+  --color-brand-muted: rgba(62, 207, 142, 0.1);
+  --color-brand-glow: rgba(62, 207, 142, 0.05);
+
+  --color-card-bg: #0c0c0c;
+  --color-panel-bg: #070708;
+  --color-card-border: #1a1a1c;
+  --color-panel-border: #151516;
 }
 
 :root {
@@ -213,4 +223,291 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ── ApiCard component ───────────────────────────────────────────────────── */
+
+@layer components {
+  .api-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-panel-border);
+    background-color: color-mix(in srgb, var(--color-card-bg) 40%, transparent);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 380px;
+    transition: border-color 300ms;
+  }
+  .api-card:hover {
+    border-color: var(--color-card-border);
+  }
+
+  .api-card__glow {
+    position: absolute;
+    right: -5rem;
+    top: -5rem;
+    height: 15rem;
+    width: 15rem;
+    border-radius: 9999px;
+    background-color: var(--color-brand-glow);
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  .api-card__icon-badge {
+    padding: 0.375rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-brand-muted);
+    color: var(--color-brand);
+    display: inline-flex;
+  }
+
+  /* Route selector button */
+  .api-route-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    transition: border-color 150ms, color 150ms, background-color 150ms;
+    cursor: pointer;
+  }
+  .api-route-btn--inactive {
+    border-color: var(--color-panel-border);
+    background-color: rgb(0 0 0 / 0.6);
+    color: var(--color-muted-foreground);
+  }
+  .api-route-btn--inactive:hover {
+    border-color: var(--color-card-border);
+    color: var(--color-foreground);
+  }
+  .api-route-btn--active {
+    border-color: color-mix(in srgb, var(--color-brand) 30%, transparent);
+    background-color: var(--color-brand-muted);
+    color: var(--color-brand);
+    font-weight: 700;
+  }
+  .api-route-btn__status {
+    font-size: 8px;
+    opacity: 0.6;
+  }
+
+  /* JSON output console */
+  .api-console {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-panel-border);
+    background-color: rgb(0 0 0 / 0.9);
+    padding: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-muted-foreground);
+    min-height: 100px;
+    overflow: auto;
+    max-height: 120px;
+    scrollbar-width: none;
+  }
+  .api-console::-webkit-scrollbar {
+    display: none;
+  }
+  .api-console__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-panel-border);
+    padding-bottom: 0.375rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 7px;
+    font-weight: 700;
+    opacity: 0.5;
+  }
+  .api-console__pre {
+    color: var(--color-foreground);
+  }
+
+  /* ── Hero component ─────────────────────────────────────────────────────── */
+
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    background: radial-gradient(ellipse 80% 80% at 50% -20%, rgba(16, 185, 129, 0.15), transparent 70%);
+  }
+  @media (min-width: 768px) {
+    .hero-section {
+      padding-top: 8rem;
+      padding-bottom: 6rem;
+    }
+  }
+  /* gradient inlined below — @apply cannot reference non-Tailwind utilities */
+
+  .hero-section__container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (min-width: 640px) {
+    .hero-section__container { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .hero-section__container { padding-left: 2rem; padding-right: 2rem; }
+  }
+
+  .hero-section__grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .hero-section__glow {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 600px;
+    height: 350px;
+    background-color: color-mix(in srgb, var(--color-brand) 10%, transparent);
+    filter: blur(120px);
+    border-radius: 9999px;
+    pointer-events: none;
+  }
+
+  /* Badge */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--color-brand) 20%, transparent);
+    background-color: color-mix(in srgb, var(--color-brand) 5%, transparent);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-brand);
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+  .hero-badge__dot {
+    display: flex;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+    background-color: var(--color-brand);
+  }
+
+  /* Heading */
+  .hero-heading {
+    max-width: 56rem;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--color-foreground);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  @media (min-width: 640px) { .hero-heading { font-size: 3.75rem; } }
+  @media (min-width: 768px) { .hero-heading { font-size: 4.5rem; } }
+
+  /* Subtitle */
+  .hero-subtitle {
+    max-width: 42rem;
+    font-size: 1rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    text-wrap: balance;
+  }
+  @media (min-width: 640px) { .hero-subtitle { font-size: 1.125rem; } }
+  @media (min-width: 768px) { .hero-subtitle { font-size: 1.25rem; } }
+
+  /* CTA buttons */
+  .hero-cta {
+    height: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 0.875rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 200ms;
+  }
+  .hero-cta--primary {
+    background-color: var(--color-brand);
+    color: #000;
+    font-weight: 600;
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+  .hero-cta--primary:hover {
+    background-color: var(--color-brand-hover);
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--color-brand) 30%, transparent);
+  }
+  .hero-cta--secondary {
+    border-color: var(--color-card-border);
+    background-color: color-mix(in srgb, var(--color-card-bg) 80%, transparent);
+    color: var(--color-muted-foreground);
+    font-weight: 500;
+  }
+  .hero-cta--secondary:hover {
+    background-color: var(--color-panel-bg);
+    color: var(--color-foreground);
+  }
+
+  /* Marquee */
+  .hero-marquee__label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+    opacity: 0.6;
+    margin-bottom: 1.5rem;
+  }
+  .hero-marquee {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in srgb, var(--color-panel-bg) 50%, transparent),
+      transparent
+    );
+    overflow: hidden;
+    width: 100%;
+  }
+  .hero-marquee__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-muted-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: color 300ms;
+  }
+  .hero-marquee__item:hover {
+    color: var(--color-foreground);
+  }
 }

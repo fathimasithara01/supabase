@@ -59,15 +59,15 @@ export function RealtimeCard() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setHovered(false)}
       id="realtime"
-      className="group relative overflow-hidden rounded-xl border border-zinc-900 bg-zinc-950/40 p-6 flex flex-col justify-between hover:border-zinc-800 transition-all duration-300 min-h-[380px] cursor-none"
+      className="group relative overflow-hidden rounded-xl border border-panel-border bg-card-bg/40 p-6 flex flex-col justify-between hover:border-card-border transition-all duration-300 min-h-[380px] cursor-none"
     >
       {/* Background glow */}
-      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-[80px] pointer-events-none" />
+      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-brand/5 blur-[80px] pointer-events-none" />
 
       {/* Info Header */}
       <div className="pointer-events-none">
         <div className="flex items-center gap-2 mb-4">
-          <span className="p-1.5 rounded-md bg-emerald-500/10 text-emerald-400">
+          <span className="p-1.5 rounded-md bg-brand/10 text-brand">
             <Globe className="h-4 w-4" />
           </span>
           <h3 className="text-lg font-bold text-white tracking-tight">Realtime</h3>
@@ -78,11 +78,11 @@ export function RealtimeCard() {
       </div>
 
       {/* Interactive Visual Canvas */}
-      <div className="relative flex-1 rounded-lg border border-zinc-900/60 bg-black/60 bg-grid-pattern overflow-hidden min-h-[160px]">
+      <div className="relative flex-1 rounded-lg border border-panel-border/60 bg-black/60 bg-grid-pattern overflow-hidden min-h-[160px]">
         {/* Helper Instructions (when not hovering) */}
         {!hovered && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300">
-            <span className="text-[10px] font-mono font-medium text-zinc-600 bg-zinc-950 px-2 py-1.5 border border-zinc-900 rounded">
+            <span className="text-[10px] font-mono font-medium text-zinc-600 bg-card-bg px-2 py-1.5 border border-panel-border rounded">
               Hover inside to sync cursors
             </span>
           </div>
@@ -99,10 +99,10 @@ export function RealtimeCard() {
             }}
           >
             {/* Custom SVG pointer */}
-            <svg className="h-4 w-4 text-emerald-500 fill-emerald-500" viewBox="0 0 24 24">
+            <svg className="h-4 w-4 text-brand fill-brand" viewBox="0 0 24 24">
               <path d="M4.5 3V19L9.5 14L15.5 20L18.5 17L12.5 11.5L17.5 9.5L4.5 3Z" stroke="black" strokeWidth="1.5" />
             </svg>
-            <span className="mt-1 ml-3 px-1.5 py-0.5 rounded bg-emerald-500 text-black text-[8px] font-extrabold font-mono uppercase">
+            <span className="mt-1 ml-3 px-1.5 py-0.5 rounded bg-brand text-black text-[8px] font-extrabold font-mono uppercase">
               You
             </span>
           </div>
@@ -126,7 +126,7 @@ export function RealtimeCard() {
               <span className="px-1.5 py-0.5 rounded bg-zinc-700 text-white text-[8px] font-bold font-mono">
                 Sarah
               </span>
-              <div className="bg-zinc-900 border border-zinc-800 text-[8px] text-zinc-300 px-1.5 py-1 rounded shadow-lg max-w-[120px] font-sans">
+              <div className="bg-zinc-900 border border-card-border text-[8px] text-zinc-300 px-1.5 py-1 rounded shadow-lg max-w-[120px] font-sans">
                 Realtime updates! 🚀
               </div>
             </div>

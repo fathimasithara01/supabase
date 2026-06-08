@@ -3,20 +3,13 @@
 import { useState } from "react";
 import { Plus, Trash2, Cpu, HelpCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { COMPUTE_SIZES, BASE_PLANS } from "@/lib/constants/pricing";
 
 interface Project {
   id: string;
   name: string;
-  sizeKey: "micro" | "small" | "medium" | "large" | "xl";
+  sizeKey: string;
 }
-
-const COMPUTE_SIZES = {
-  micro: { name: "Micro", price: 10, cpu: "2-core ARM (Shared)", ram: "1 GB", direct: 60, pooler: 200, dedicated: false },
-  small: { name: "Small", price: 15, cpu: "2-core ARM", ram: "2 GB", direct: 90, pooler: 400, dedicated: true },
-  medium: { name: "Medium", price: 60, cpu: "2-core ARM", ram: "4 GB", direct: 120, pooler: 800, dedicated: true },
-  large: { name: "Large", price: 120, cpu: "4-core ARM", ram: "8 GB", direct: 200, pooler: 1600, dedicated: true },
-  xl: { name: "XL", price: 240, cpu: "8-core ARM", ram: "16 GB", direct: 400, pooler: 3200, dedicated: true },
-};
 
 export function ComputePricing() {
   const [basePlan, setBasePlan] = useState<"pro" | "team">("pro");
@@ -25,8 +18,8 @@ export function ComputePricing() {
   ]);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
 
-  const planPrice = basePlan === "pro" ? 25 : 599;
-  const creditAmount = basePlan === "pro" ? 10 : 10; // Pro/Team get $10/mo compute credits
+  const planPrice = basePlan === "pro" ? BASE_PLANS.pro.price : BASE_PLANS.team.price;
+  const creditAmount = basePlan === "pro" ? BASE_PLANS.pro.credits : BASE_PLANS.team.credits;
 
   // Add project
   const addProject = () => {
@@ -44,18 +37,21 @@ export function ComputePricing() {
   };
 
   // Change project size
-  const changeProjectSize = (id: string, sizeKey: "micro" | "small" | "medium" | "large" | "xl") => {
+  const changeProjectSize = (id: string, sizeKey: string) => {
     setProjects(projects.map(p => p.id === id ? { ...p, sizeKey } : p));
   };
 
   // Calculate compute total
-  const computeTotal = projects.reduce((acc, p) => acc + COMPUTE_SIZES[p.sizeKey].price, 0);
+  const computeTotal = projects.reduce((acc, p) => {
+    const size = COMPUTE_SIZES[p.sizeKey];
+    return acc + (size ? size.price : 0);
+  }, 0);
 
   // Grand Total calculation
   const grandTotal = Math.max(0, planPrice + computeTotal - creditAmount);
 
   return (
-    <section className="bg-[#030303] py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
+    <section className="bg-background py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
       <div className="mx-auto max-w-5xl">
         
         {/* Headings */}
@@ -69,7 +65,7 @@ export function ComputePricing() {
           <a
             href="https://supabase.com/docs/guides/platform/compute"
             target="_blank"
-            className="inline-flex items-center gap-1 mt-4 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+            className="inline-flex items-center gap-1 mt-4 text-xs font-semibold text-brand hover:text-brand-hover transition-colors"
           >
             <span>What is "compute"?</span>
             <HelpCircle className="h-3.5 w-3.5" />
@@ -77,7 +73,7 @@ export function ComputePricing() {
         </div>
 
         {/* Dynamic Calculator Widget */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start rounded-xl border border-zinc-800 bg-[#070708] p-6 sm:p-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start rounded-xl border border-zinc-800 bg-panel-bg p-6 sm:p-8">
           
           {/* Left Column: Plan selection & total estimate */}
           <div className="md:col-span-5 flex flex-col justify-between h-full gap-6">
@@ -112,40 +108,38 @@ export function ComputePricing() {
 
               {/* Plan description */}
               <div className="mb-4">
-                <div className="text-lg font-bold text-white font-sans">{basePlan === "pro" ? "Pro" : "Team"}</div>
-                <div className="text-sm font-semibold text-emerald-400 mt-1">${planPrice}/month</div>
-                <p className="text-xs text-zinc-500 mt-2 leading-relaxed">
-                  {basePlan === "pro"
-                    ? "Everything in the Free Plan, plus 100K MAU, 8 GB disk space, 250 GB bandwidth, 7-day backups, and email support."
-                    : "SSO support, read-only dashboard access, 14-day backups, HIPAA support option, and priority response SLAs."}
-                </p>
+                  <div className="text-lg font-bold text-white font-sans">{basePlan === "pro" ? BASE_PLANS.pro.name : BASE_PLANS.team.name}</div>
+                  <div className="text-sm font-semibold text-brand mt-1">${planPrice}/month</div>
+                  <p className="text-xs text-zinc-500 mt-2 leading-relaxed">
+                    {basePlan === "pro" ? BASE_PLANS.pro.description : BASE_PLANS.team.description}
+                  </p>
+                </div>
               </div>
-            </div>
 
-            {/* Total Cost Summary Card */}
-            <div className="rounded-lg border border-zinc-800 bg-zinc-950/60 p-4">
-              <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-3">
-                Monthly estimate
+              {/* Total Cost Summary Card */}
+              <div className="rounded-lg border border-zinc-800 bg-zinc-950/60 p-4">
+                <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-3">
+                  Monthly estimate
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-zinc-400">Plan subscription</span>
+                    <span className="text-white font-semibold">${planPrice}.00</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-zinc-400">Total Compute</span>
+                    <span className="text-white font-semibold">${computeTotal}.00</span>
+                  </div>
+                  <div className="flex justify-between border-b border-zinc-900 pb-2">
+                    <span className="text-zinc-400">Compute Credits</span>
+                    <span className="text-brand font-semibold">-${creditAmount}.00</span>
+                  </div>
+                  <div className="flex justify-between items-baseline pt-2">
+                    <span className="text-sm font-bold text-white">Total</span>
+                    <span className="text-xl font-bold text-brand">${grandTotal}.00<span className="text-[10px] font-normal text-zinc-500">/mo</span></span>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2 text-xs">
-                <div className="flex justify-between">
-                  <span className="text-zinc-400">Plan subscription</span>
-                  <span className="text-white font-semibold">${planPrice}.00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-zinc-400">Total Compute</span>
-                  <span className="text-white font-semibold">${computeTotal}.00</span>
-                </div>
-                <div className="flex justify-between border-b border-zinc-900 pb-2">
-                  <span className="text-zinc-400">Compute Credits</span>
-                  <span className="text-emerald-500 font-semibold">-${creditAmount}.00</span>
-                </div>
-                <div className="flex justify-between items-baseline pt-2">
-                  <span className="text-sm font-bold text-white">Total</span>
-                  <span className="text-xl font-bold text-emerald-400">${grandTotal}.00<span className="text-[10px] font-normal text-zinc-500">/mo</span></span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right Column: Project configuration */}
@@ -161,11 +155,11 @@ export function ComputePricing() {
               {projects.map((project, idx) => (
                 <div
                   key={project.id}
-                  className="rounded-lg border border-zinc-850 bg-zinc-950 p-4 transition-all hover:border-zinc-800"
+                  className="rounded-lg border border-card-border bg-card-bg p-4 transition-all hover:border-zinc-800"
                 >
                   <div className="flex justify-between items-center mb-3">
                     <div className="flex items-center gap-2">
-                      <Cpu className="h-4 w-4 text-emerald-500" />
+                      <Cpu className="h-4 w-4 text-brand" />
                       <span className="text-xs font-semibold text-white">{project.name}</span>
                     </div>
                     {projects.length > 1 && (
@@ -185,8 +179,8 @@ export function ComputePricing() {
                       </label>
                       <select
                         value={project.sizeKey}
-                        onChange={(e) => changeProjectSize(project.id, e.target.value as any)}
-                        className="w-full bg-[#0a0a0b] border border-zinc-850 rounded px-2 py-1 text-xs text-zinc-300 font-semibold outline-none focus:border-zinc-700"
+                        onChange={(e) => changeProjectSize(project.id, e.target.value)}
+                        className="w-full bg-panel-bg border border-card-border rounded px-2 py-1 text-xs text-zinc-300 font-semibold outline-none focus:border-zinc-700"
                       >
                         {Object.entries(COMPUTE_SIZES).map(([key, size]) => (
                           <option key={key} value={key}>
@@ -201,7 +195,9 @@ export function ComputePricing() {
                         Specifications
                       </div>
                       <div className="text-[11px] text-zinc-400 mt-1">
-                        {COMPUTE_SIZES[project.sizeKey].ram} RAM / {COMPUTE_SIZES[project.sizeKey].cpu}
+                        {COMPUTE_SIZES[project.sizeKey] ? (
+                          `${COMPUTE_SIZES[project.sizeKey].ram} RAM / ${COMPUTE_SIZES[project.sizeKey].cpu}`
+                        ) : ""}
                       </div>
                     </div>
                   </div>
@@ -231,16 +227,16 @@ export function ComputePricing() {
             <a
               href="https://supabase.com/docs/guides/platform/compute"
               target="_blank"
-              className="text-xs text-zinc-400 hover:text-emerald-400 font-medium transition-colors"
+              className="text-xs text-zinc-400 hover:text-brand font-medium transition-colors"
             >
               Learn about Compute add-ons
             </a>
           </div>
 
-          <div className="rounded-xl border border-zinc-800 bg-[#070708] overflow-hidden">
+          <div className="rounded-xl border border-zinc-800 bg-panel-bg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#0b0b0c] text-zinc-400 font-semibold border-b border-zinc-800">
+                <thead className="bg-card-bg text-zinc-400 font-semibold border-b border-zinc-800">
                   <tr>
                     <th className="p-4">Compute Size</th>
                     <th className="p-4">Price USD</th>
@@ -251,73 +247,34 @@ export function ComputePricing() {
                     <th className="p-4">Connections Pooler</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-900 text-zinc-300">
-                  <tr className="hover:bg-zinc-950/40 transition-colors">
-                    <td className="p-4 font-bold text-white">Micro</td>
-                    <td className="p-4">$10/mo</td>
-                    <td className="p-4">2-core ARM</td>
-                    <td className="p-4 text-zinc-500">Shared (First instance is free on paid plans)</td>
-                    <td className="p-4">1 GB</td>
-                    <td className="p-4">60</td>
-                    <td className="p-4">200</td>
-                  </tr>
-                  <tr className="hover:bg-zinc-950/40 transition-colors">
-                    <td className="p-4 font-bold text-white">Small</td>
-                    <td className="p-4">$15/mo</td>
-                    <td className="p-4">2-core ARM</td>
-                    <td className="p-4 text-emerald-400">Yes</td>
-                    <td className="p-4">2 GB</td>
-                    <td className="p-4">90</td>
-                    <td className="p-4">400</td>
-                  </tr>
-
-                  {/* Expanded Rows */}
-                  {isTableExpanded && (
-                    <>
-                      <tr className="hover:bg-zinc-950/40 transition-colors">
-                        <td className="p-4 font-bold text-white">Medium</td>
-                        <td className="p-4">$60/mo</td>
-                        <td className="p-4">2-core ARM</td>
-                        <td className="p-4 text-emerald-400">Yes</td>
-                        <td className="p-4">4 GB</td>
-                        <td className="p-4">120</td>
-                        <td className="p-4">800</td>
+                <tbody className="divide-y divide-panel-border text-zinc-300">
+                  {Object.entries(COMPUTE_SIZES).map(([key, size]) => {
+                    const isExpandedRow = key === "medium" || key === "large" || key === "xl" || key === "2xl";
+                    if (isExpandedRow && !isTableExpanded) return null;
+                    return (
+                      <tr key={key} className="hover:bg-brand-glow transition-colors">
+                        <td className="p-4 font-bold text-white">{size.name}</td>
+                        <td className="p-4">${size.price}/mo</td>
+                        <td className="p-4">{size.cpu}</td>
+                        <td className="p-4">
+                          {size.dedicated ? (
+                            <span className="text-brand font-semibold">Yes</span>
+                          ) : (
+                            <span className="text-zinc-500">{size.dedicatedLabel || "Shared"}</span>
+                          )}
+                        </td>
+                        <td className="p-4">{size.ram}</td>
+                        <td className="p-4">{size.direct}</td>
+                        <td className="p-4">{size.pooler}</td>
                       </tr>
-                      <tr className="hover:bg-zinc-950/40 transition-colors">
-                        <td className="p-4 font-bold text-white">Large</td>
-                        <td className="p-4">$120/mo</td>
-                        <td className="p-4">4-core ARM</td>
-                        <td className="p-4 text-emerald-400">Yes</td>
-                        <td className="p-4">8 GB</td>
-                        <td className="p-4">200</td>
-                        <td className="p-4">1600</td>
-                      </tr>
-                      <tr className="hover:bg-zinc-950/40 transition-colors">
-                        <td className="p-4 font-bold text-white">XL</td>
-                        <td className="p-4">$240/mo</td>
-                        <td className="p-4">8-core ARM</td>
-                        <td className="p-4 text-emerald-400">Yes</td>
-                        <td className="p-4">16 GB</td>
-                        <td className="p-4">400</td>
-                        <td className="p-4">3200</td>
-                      </tr>
-                      <tr className="hover:bg-zinc-950/40 transition-colors">
-                        <td className="p-4 font-bold text-white">2XL</td>
-                        <td className="p-4">$480/mo</td>
-                        <td className="p-4">16-core ARM</td>
-                        <td className="p-4 text-emerald-400">Yes</td>
-                        <td className="p-4">32 GB</td>
-                        <td className="p-4">800</td>
-                        <td className="p-4">6400</td>
-                      </tr>
-                    </>
-                  )}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
 
             {/* Expand Pricing Breakdown button */}
-            <div className="bg-[#0b0b0c] text-center border-t border-zinc-800">
+            <div className="bg-card-bg text-center border-t border-zinc-800">
               <button
                 onClick={() => setIsTableExpanded(!isTableExpanded)}
                 className="w-full py-3 text-xs text-zinc-400 hover:text-white transition-colors flex items-center justify-center gap-1.5 cursor-pointer font-medium"

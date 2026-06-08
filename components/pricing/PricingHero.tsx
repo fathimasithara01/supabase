@@ -6,12 +6,12 @@ export function PricingHero() {
       {/* Decorative Glows & Grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
       <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="relative mx-auto max-w-5xl text-center">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-sans text-white tracking-tight leading-tight">
           Predictable pricing,{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-hover">
             designed to scale
           </span>
         </h1>

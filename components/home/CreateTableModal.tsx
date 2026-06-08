@@ -31,11 +31,11 @@ export function CreateTableModal({ isOpen, onClose, onSave }: CreateTableModalPr
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
       {/* Modal Wrapper */}
       <div
-        className="w-full max-w-xl rounded-lg border border-zinc-800 bg-[#0c0c0c] text-white shadow-2xl overflow-hidden animate-float-slow"
+        className="w-full max-w-xl rounded-lg border border-card-border bg-card-bg text-white shadow-2xl overflow-hidden animate-float-slow"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between border-b border-zinc-900 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-panel-border px-6 py-4">
           <div className="flex flex-col">
             <h3 className="text-base font-bold text-white">Create a new table</h3>
             <span className="text-[10px] text-zinc-500 font-mono">under public schema</span>
@@ -61,7 +61,7 @@ export function CreateTableModal({ isOpen, onClose, onSave }: CreateTableModalPr
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-md border border-zinc-800 bg-black/60 px-3 py-2 text-xs font-mono text-white placeholder-zinc-700 focus:border-emerald-500/50 focus:outline-none transition-colors"
+              className="w-full rounded-md border border-card-border bg-black/60 px-3 py-2 text-xs font-mono text-white placeholder-zinc-700 focus:border-brand/50 focus:outline-none transition-colors"
               placeholder="table_name"
             />
           </div>
@@ -76,24 +76,24 @@ export function CreateTableModal({ isOpen, onClose, onSave }: CreateTableModalPr
               type="text"
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
-              className="w-full rounded-md border border-zinc-800 bg-black/60 px-3 py-2 text-xs text-white placeholder-zinc-700 focus:border-emerald-500/50 focus:outline-none transition-colors"
+              className="w-full rounded-md border border-card-border bg-black/60 px-3 py-2 text-xs text-white placeholder-zinc-700 focus:border-brand/50 focus:outline-none transition-colors"
               placeholder="Describe your table"
             />
           </div>
 
           {/* RLS Switch checkbox */}
-          <div className="rounded-lg border border-zinc-900 bg-black/40 p-4 space-y-2.5">
+          <div className="rounded-lg border border-panel-border bg-black/40 p-4 space-y-2.5">
             <label className="flex items-start gap-3 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={rlsEnabled}
                 onChange={(e) => setRlsEnabled(e.target.checked)}
-                className="mt-1 h-3.5 w-3.5 accent-emerald-500 cursor-pointer"
+                className="mt-1 h-3.5 w-3.5 accent-brand cursor-pointer"
               />
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-white flex items-center gap-1.5">
                   Enable Row Level Security (RLS)
-                  <span className="rounded bg-emerald-500/10 px-1 py-0.5 text-[8px] font-semibold text-emerald-400">
+                  <span className="rounded bg-brand/10 px-1 py-0.5 text-[8px] font-semibold text-brand">
                     Recommended
                   </span>
                 </span>
@@ -120,18 +120,18 @@ export function CreateTableModal({ isOpen, onClose, onSave }: CreateTableModalPr
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-900/60">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-panel-border/60">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
-              className="h-8 border-zinc-800 bg-zinc-950/80 hover:bg-zinc-900 text-xs text-zinc-400 hover:text-white cursor-pointer"
+              className="h-8 border-card-border bg-card-bg/80 hover:bg-panel-bg text-xs text-zinc-400 hover:text-white cursor-pointer"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="h-8 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold text-xs px-4 rounded shadow-md cursor-pointer"
+              className="h-8 bg-brand hover:bg-brand-hover text-black font-semibold text-xs px-4 rounded shadow-md cursor-pointer"
             >
               Save
             </Button>

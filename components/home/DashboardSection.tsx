@@ -80,7 +80,7 @@ export function DashboardSection() {
   const activeTable = tables.find((t) => t.id === activeTableId) || tables[0];
 
   return (
-    <section id="dashboard" className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-t border-zinc-900/60 relative">
+    <section id="dashboard" className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-t border-panel-border/60 relative">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -99,7 +99,7 @@ export function DashboardSection() {
               "Easy as a spreadsheet",
             ].map((f) => (
               <span key={f} className="inline-flex items-center gap-1.5 text-xs text-zinc-400 font-medium">
-                <Check className="h-3.5 w-3.5 text-emerald-500 stroke-[3px]" />
+                <Check className="h-3.5 w-3.5 text-brand stroke-[3px]" />
                 {f}
               </span>
             ))}
@@ -108,7 +108,7 @@ export function DashboardSection() {
 
         {/* Dashboard Tabs Selector */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex rounded-lg bg-zinc-950 p-1 border border-zinc-900">
+          <div className="inline-flex rounded-lg bg-card-bg p-1 border border-panel-border">
             {(["Table Editor", "SQL Editor", "RLS Policies"] as const).map((tab) => (
               <button
                 key={tab}
@@ -126,12 +126,12 @@ export function DashboardSection() {
         </div>
 
         {/* Supabase Studio Panel Mockup */}
-        <div className="rounded-xl border border-zinc-900 bg-[#0c0c0c] shadow-2xl overflow-hidden min-h-[480px] flex flex-col md:flex-row">
+        <div className="rounded-xl border border-panel-border bg-card-bg shadow-2xl overflow-hidden min-h-[480px] flex flex-col md:flex-row">
           {/* Studio Sidebar */}
-          <div className="w-full md:w-56 border-r border-zinc-900/80 bg-[#070707] flex flex-row md:flex-col select-none shrink-0 overflow-auto">
+          <div className="w-full md:w-56 border-r border-panel-border/80 bg-panel-bg flex flex-row md:flex-col select-none shrink-0 overflow-auto">
             {/* Quick Icon strip (desktop only) */}
-            <div className="hidden md:flex flex-col items-center gap-5 py-6 border-r border-zinc-900/40 w-12 shrink-0">
-              <span className="p-1.5 rounded-md bg-emerald-500/10 text-emerald-500"><Database className="h-4 w-4" /></span>
+            <div className="hidden md:flex flex-col items-center gap-5 py-6 border-r border-panel-border/40 w-12 shrink-0">
+              <span className="p-1.5 rounded-md bg-brand/10 text-brand"><Database className="h-4 w-4" /></span>
               <span className="text-zinc-600 hover:text-zinc-400 cursor-pointer"><Terminal className="h-4 w-4" /></span>
               <span className="text-zinc-600 hover:text-zinc-400 cursor-pointer"><ShieldAlert className="h-4 w-4" /></span>
               <span className="text-zinc-600 hover:text-zinc-400 cursor-pointer"><Settings className="h-4 w-4" /></span>
@@ -143,7 +143,7 @@ export function DashboardSection() {
                 <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">public schema</span>
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="rounded p-1 text-emerald-400 hover:bg-zinc-900 hover:text-white transition-colors cursor-pointer"
+                  className="rounded p-1 text-brand hover:bg-panel-bg hover:text-white transition-colors cursor-pointer"
                   title="Create Table"
                 >
                   <Plus className="h-3.5 w-3.5" />
@@ -160,12 +160,12 @@ export function DashboardSection() {
                       className={`flex items-center justify-between rounded px-2.5 py-1.5 text-xs text-left transition-colors font-mono cursor-pointer ${
                         activeTableId === table.id
                           ? "bg-zinc-900 text-white font-semibold"
-                          : "text-zinc-500 hover:bg-zinc-900/50 hover:text-zinc-300"
+                          : "text-zinc-500 hover:bg-panel-bg/50 hover:text-zinc-300"
                       }`}
                     >
                       <span>{table.name}</span>
                       {table.rls && (
-                        <span className="text-[8px] bg-emerald-500/10 text-emerald-400 px-1 rounded scale-90">RLS</span>
+                        <span className="text-[8px] bg-brand/10 text-brand px-1 rounded scale-90">RLS</span>
                       )}
                     </button>
                   ))}
@@ -187,24 +187,24 @@ export function DashboardSection() {
           </div>
 
           {/* Main Dashboard Workspace */}
-          <div className="flex-1 flex flex-col bg-[#0c0c0c] overflow-x-auto">
+          <div className="flex-1 flex flex-col bg-card-bg overflow-x-auto">
             {/* Table Editor Workspace */}
             {activeTab === "Table Editor" && (
               <div className="flex-1 flex flex-col h-full min-w-[500px]">
                 {/* Workspace Header */}
-                <div className="flex items-center justify-between border-b border-zinc-900/80 px-6 py-3 bg-[#0a0a0a]">
+                <div className="flex items-center justify-between border-b border-panel-border/80 px-6 py-3 bg-card-bg">
                   <div className="flex items-center gap-3">
                     <h4 className="text-sm font-bold text-white font-mono">{activeTable.name}</h4>
                     <span className="text-[10px] text-zinc-500">{activeTable.rows.length} rows</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="flex items-center gap-1.5 rounded border border-zinc-800 bg-zinc-950 px-2 py-1 text-[10px] font-semibold text-zinc-400 hover:text-white cursor-pointer">
+                    <button className="flex items-center gap-1.5 rounded border border-card-border bg-card-bg px-2 py-1 text-[10px] font-semibold text-zinc-400 hover:text-white cursor-pointer">
                       <Filter className="h-3 w-3" />
                       Filter
                     </button>
                     <button
                       onClick={() => setIsModalOpen(true)}
-                      className="flex items-center gap-1.5 rounded bg-emerald-500 px-2.5 py-1 text-[10px] font-bold text-black hover:bg-emerald-400 cursor-pointer"
+                      className="flex items-center gap-1.5 rounded bg-brand px-2.5 py-1 text-[10px] font-bold text-black hover:bg-brand-hover cursor-pointer"
                     >
                       <Plus className="h-3 w-3" />
                       New Table
@@ -214,12 +214,12 @@ export function DashboardSection() {
 
                 {/* Workspace Table Grid */}
                 <div className="flex-1 p-6">
-                  <div className="w-full overflow-hidden rounded-lg border border-zinc-900 bg-black/40">
+                  <div className="w-full overflow-hidden rounded-lg border border-panel-border bg-black/40">
                     <table className="w-full border-collapse text-left text-xs text-zinc-400 font-mono">
-                      <thead className="bg-[#090909] text-[10px] text-zinc-500 border-b border-zinc-900 font-bold uppercase tracking-wider">
+                      <thead className="bg-panel-bg text-[10px] text-zinc-500 border-b border-panel-border font-bold uppercase tracking-wider">
                         <tr>
                           {activeTable.columns.map((col) => (
-                            <th key={col} className="px-4 py-2.5 border-r border-zinc-900 last:border-r-0">
+                            <th key={col} className="px-4 py-2.5 border-r border-panel-border last:border-r-0">
                               {col}
                             </th>
                           ))}
@@ -227,9 +227,9 @@ export function DashboardSection() {
                       </thead>
                       <tbody className="divide-y divide-zinc-900">
                         {activeTable.rows.map((row, rowIdx) => (
-                          <tr key={rowIdx} className="hover:bg-zinc-900/30 transition-colors">
+                          <tr key={rowIdx} className="hover:bg-panel-bg/30 transition-colors">
                             {activeTable.columns.map((col) => (
-                              <td key={col} className="px-4 py-2 border-r border-zinc-900 last:border-r-0 text-zinc-300">
+                              <td key={col} className="px-4 py-2 border-r border-panel-border last:border-r-0 text-zinc-300">
                                 {String(row[col] ?? "")}
                               </td>
                             ))}
@@ -246,19 +246,19 @@ export function DashboardSection() {
             {activeTab === "SQL Editor" && (
               <div className="flex-1 flex flex-col p-6 min-w-[500px] h-full justify-between gap-4">
                 <div className="flex-1 flex flex-col gap-3">
-                  <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 uppercase tracking-wider border-b border-zinc-900 pb-2">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 uppercase tracking-wider border-b border-panel-border pb-2">
                     <span>SQL Query Console</span>
                     <Code className="h-3.5 w-3.5" />
                   </div>
                   <textarea
                     value={sqlQuery}
                     onChange={(e) => setSqlQuery(e.target.value)}
-                    className="w-full flex-1 min-h-[160px] rounded-lg border border-zinc-900 bg-black/80 p-4 font-mono text-xs text-emerald-400 focus:outline-none focus:border-emerald-500/40 resize-none"
+                    className="w-full flex-1 min-h-[160px] rounded-lg border border-panel-border bg-black/80 p-4 font-mono text-xs text-brand focus:outline-none focus:border-brand/40 resize-none"
                   />
                   <div className="flex justify-end">
                     <button
                       onClick={handleRunSQL}
-                      className="flex items-center gap-1.5 rounded bg-emerald-500 px-4 py-2 text-xs font-bold text-black hover:bg-emerald-400 cursor-pointer shadow-lg shadow-emerald-500/10"
+                      className="flex items-center gap-1.5 rounded bg-brand px-4 py-2 text-xs font-bold text-black hover:bg-brand-hover cursor-pointer shadow-lg shadow-brand/10"
                     >
                       <Plus className="h-3.5 w-3.5" />
                       Run SQL Query
@@ -268,7 +268,7 @@ export function DashboardSection() {
 
                 {/* Query Result Grid Console */}
                 {sqlResult && (
-                  <div className="rounded-lg border border-zinc-900 bg-black/90 p-4 font-mono text-xs max-h-[160px] overflow-auto">
+                  <div className="rounded-lg border border-panel-border bg-black/90 p-4 font-mono text-xs max-h-[160px] overflow-auto">
                     <div className="text-[9px] text-zinc-500 uppercase font-bold tracking-wider mb-2">Result Panel</div>
                     <pre className="text-zinc-300 text-[10px]">
                       {JSON.stringify(sqlResult, null, 2)}
@@ -281,21 +281,21 @@ export function DashboardSection() {
             {/* RLS Policies Workspace */}
             {activeTab === "RLS Policies" && (
               <div className="flex-1 p-6 min-w-[500px]">
-                <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider border-b border-zinc-900 pb-2 mb-4">
+                <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider border-b border-panel-border pb-2 mb-4">
                   Row Level Security Policies
                 </div>
                 <div className="space-y-4">
                   {tables.map((table) => (
                     <div
                       key={table.id}
-                      className="rounded-lg border border-zinc-900 bg-[#070707] p-4 flex items-center justify-between"
+                      className="rounded-lg border border-panel-border bg-panel-bg p-4 flex items-center justify-between"
                     >
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-sm font-bold text-white font-mono">{table.name}</span>
                           <span
                             className={`rounded px-1.5 py-0.5 text-[9px] font-semibold ${
-                              table.rls ? "bg-emerald-500/10 text-emerald-400" : "bg-red-500/10 text-red-400"
+                              table.rls ? "bg-brand/10 text-brand" : "bg-red-500/10 text-red-400"
                             }`}
                           >
                             {table.rls ? "RLS Enabled" : "RLS Disabled"}
@@ -304,7 +304,7 @@ export function DashboardSection() {
                         <p className="text-xs text-zinc-500 mt-1">{table.desc}</p>
                       </div>
 
-                      <button className="rounded border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs font-semibold text-zinc-300 hover:text-white cursor-pointer">
+                      <button className="rounded border border-card-border bg-card-bg px-3 py-1.5 text-xs font-semibold text-zinc-300 hover:text-white cursor-pointer">
                         Manage Policies
                       </button>
                     </div>

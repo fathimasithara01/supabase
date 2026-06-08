@@ -59,7 +59,7 @@ export function PricingFaq() {
   };
 
   return (
-    <section className="bg-[#030303] py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
+    <section className="bg-background py-20 px-4 sm:px-6 lg:px-8 border-b border-panel-border">
       <div className="mx-auto max-w-3xl">
         
         {/* Heading */}
@@ -76,7 +76,7 @@ export function PricingFaq() {
             return (
               <div
                 key={idx}
-                className="rounded-lg border border-zinc-850 bg-zinc-950 overflow-hidden transition-all hover:border-zinc-800"
+                className="rounded-lg border border-card-border bg-card-bg overflow-hidden transition-all hover:border-panel-border"
               >
                 <button
                   onClick={() => toggleFaq(idx)}
@@ -85,7 +85,7 @@ export function PricingFaq() {
                   <span className="pr-4">{faq.question}</span>
                   <ChevronDown
                     className={`h-4 w-4 text-zinc-500 shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-emerald-400" : ""
+                      isOpen ? "rotate-180 text-brand" : ""
                     }`}
                   />
                 </button>
@@ -93,10 +93,10 @@ export function PricingFaq() {
                 {/* Answer Area */}
                 <div
                   className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    isOpen ? "max-h-[300px] border-t border-zinc-900" : "max-h-0"
+                    isOpen ? "max-h-[300px] border-t border-card-border" : "max-h-0"
                   }`}
                 >
-                  <p className="p-5 text-xs text-zinc-400 leading-relaxed bg-[#070708]">
+                  <p className="p-5 text-xs text-zinc-400 leading-relaxed bg-panel-bg">
                     {faq.answer}
                   </p>
                 </div>
@@ -111,7 +111,7 @@ export function PricingFaq() {
           <a
             href="https://supabase.com/dashboard/support/new"
             target="_blank"
-            className="text-emerald-400 hover:text-emerald-300 transition-colors font-semibold"
+            className="text-brand hover:text-brand-hover transition-colors font-semibold"
           >
             Open a support ticket
           </a>{" "}

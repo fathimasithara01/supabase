@@ -56,7 +56,7 @@ export function Frameworks() {
   ];
 
   return (
-    <section className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-t border-zinc-900/60 relative">
+    <section className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-t border-panel-border/60 relative">
       <div className="mx-auto max-w-7xl">
         {/* Framework Integrations */}
         <div className="text-center mb-24">
@@ -67,7 +67,7 @@ export function Frameworks() {
             {frameworks.map((fw, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-center h-14 w-14 rounded-xl border border-zinc-900 bg-zinc-950/80 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:scale-115 transition-all duration-300 shadow-lg group cursor-pointer"
+                className="flex items-center justify-center h-14 w-14 rounded-xl border border-panel-border bg-card-bg/80 hover:border-brand/30 hover:bg-brand/5 hover:scale-115 transition-all duration-300 shadow-lg group cursor-pointer"
                 title={fw.name}
               >
                 <span className="text-xl group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]">
@@ -80,7 +80,7 @@ export function Frameworks() {
 
         {/* Customer Stories Header */}
         <div className="mb-12">
-          <div className="text-xs font-semibold tracking-wider text-emerald-400 uppercase mb-3">
+          <div className="text-xs font-semibold tracking-wider text-brand uppercase mb-3">
             Customer Stories
           </div>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -95,7 +95,7 @@ export function Frameworks() {
             <div className="flex gap-3">
               <Link
                 href="#"
-                className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-950 px-4 py-2 text-xs font-semibold text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-md border border-card-border bg-card-bg px-4 py-2 text-xs font-semibold text-zinc-300 hover:text-white hover:border-panel-border transition-colors"
               >
                 <span>View all stories</span>
                 <ArrowUpRight className="h-3 w-3" />
@@ -109,11 +109,11 @@ export function Frameworks() {
           {stories.map((story, idx) => (
             <div
               key={idx}
-              className="group relative overflow-hidden rounded-xl border border-zinc-900 bg-zinc-950/40 p-6 flex flex-col justify-between hover:border-zinc-800 hover:bg-zinc-950/60 transition-all duration-300 min-h-[180px]"
+              className="group relative overflow-hidden rounded-xl border border-panel-border bg-card-bg/40 p-6 flex flex-col justify-between hover:border-card-border hover:bg-card-bg/60 transition-all duration-300 min-h-[180px]"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-extrabold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+                  <span className="text-sm font-extrabold text-white tracking-tight group-hover:text-brand transition-colors">
                     {story.company}
                   </span>
                   <div className="flex gap-1.5">
@@ -131,7 +131,7 @@ export function Frameworks() {
                   {story.desc}
                 </p>
               </div>
-              <div className="mt-4 pt-4 border-t border-zinc-900/60 flex items-center justify-between text-[10px] text-zinc-500">
+              <div className="mt-4 pt-4 border-t border-panel-border/60 flex items-center justify-between text-[10px] text-zinc-500">
                 <span className="hover:text-white transition-colors cursor-pointer inline-flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
                   Read case study →
                 </span>

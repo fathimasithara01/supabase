@@ -52,15 +52,15 @@ export function StorageCard() {
   return (
     <div
       id="storage"
-      className="group relative overflow-hidden rounded-xl border border-zinc-900 bg-zinc-950/40 p-6 flex flex-col justify-between hover:border-zinc-800 transition-all duration-300 min-h-[380px]"
+      className="group relative overflow-hidden rounded-xl border border-panel-border bg-card-bg/40 p-6 flex flex-col justify-between hover:border-card-border transition-all duration-300 min-h-[380px]"
     >
       {/* Background glow */}
-      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-[80px] pointer-events-none" />
+      <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-brand/5 blur-[80px] pointer-events-none" />
 
       {/* Info Header */}
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <span className="p-1.5 rounded-md bg-emerald-500/10 text-emerald-400">
+          <span className="p-1.5 rounded-md bg-brand/10 text-brand">
             <FolderHeart className="h-4 w-4" />
           </span>
           <h3 className="text-lg font-bold text-white tracking-tight">Storage</h3>
@@ -72,11 +72,11 @@ export function StorageCard() {
 
       {/* Visual File Listing */}
       <div className="relative flex-1 flex flex-col justify-center gap-2.5 select-none">
-        <div className="flex items-center justify-between border-b border-zinc-900 pb-2 mb-1">
+        <div className="flex items-center justify-between border-b border-panel-border pb-2 mb-1">
           <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Bucket: public-assets</span>
           <button
             onClick={simulateUpload}
-            className="flex items-center gap-1 text-[9px] text-emerald-400 hover:text-white font-bold cursor-pointer"
+            className="flex items-center gap-1 text-[9px] text-brand hover:text-white font-bold cursor-pointer"
           >
             <Plus className="h-3 w-3" />
             Upload File
@@ -84,14 +84,14 @@ export function StorageCard() {
         </div>
 
         {uploadProgress !== null && (
-          <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-2 text-[10px] font-mono">
-            <div className="flex justify-between text-emerald-400 mb-1 font-semibold">
+          <div className="rounded-lg border border-brand/20 bg-brand/5 p-2 text-[10px] font-mono">
+            <div className="flex justify-between text-brand mb-1 font-semibold">
               <span>Uploading asset...</span>
               <span>{uploadProgress}%</span>
             </div>
             <div className="w-full bg-zinc-900 h-1 rounded overflow-hidden">
               <div
-                className="bg-emerald-500 h-full transition-all duration-300"
+                className="bg-brand h-full transition-all duration-300"
                 style={{ width: `${uploadProgress}%` }}
               />
             </div>
@@ -102,10 +102,10 @@ export function StorageCard() {
           {files.map((file) => (
             <div
               key={file.id}
-              className="group/file flex items-center justify-between rounded-lg border border-zinc-900 bg-black/60 p-2 hover:border-zinc-800 hover:bg-zinc-900/40 transition-colors"
+              className="group/file flex items-center justify-between rounded-lg border border-panel-border bg-black/60 p-2 hover:border-card-border hover:bg-panel-bg/40 transition-colors"
             >
               <div className="flex items-center gap-2 overflow-hidden">
-                <span className="p-1.5 rounded bg-zinc-900 text-zinc-400 group-hover/file:text-emerald-400 shrink-0">
+                <span className="p-1.5 rounded bg-zinc-900 text-zinc-400 group-hover/file:text-brand shrink-0">
                   {file.type === "image" && <Image className="h-3.5 w-3.5" />}
                   {file.type === "document" && <FileText className="h-3.5 w-3.5" />}
                   {file.type === "video" && <Video className="h-3.5 w-3.5" />}

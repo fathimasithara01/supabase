@@ -24,7 +24,7 @@ export function PlanComparison() {
   const sections: FeatureSection[] = [
     {
       title: "Database",
-      icon: <Database className="h-4 w-4 text-emerald-500" />,
+      icon: <Database className="h-4 w-4 text-brand" />,
       features: [
         { name: "Dedicated Postgres Database", free: true, pro: true, team: true, enterprise: true },
         { name: "Unlimited API requests", free: true, pro: true, team: true, enterprise: true },
@@ -36,7 +36,7 @@ export function PlanComparison() {
     },
     {
       title: "Auth",
-      icon: <Shield className="h-4 w-4 text-emerald-500" />,
+      icon: <Shield className="h-4 w-4 text-brand" />,
       features: [
         { name: "Total Users", free: "Unlimited", pro: "Unlimited", team: "Unlimited", enterprise: "Unlimited" },
         { name: "MAUs included", free: "50,000", pro: "100,000", team: "100,000", enterprise: "Custom" },
@@ -48,7 +48,7 @@ export function PlanComparison() {
     },
     {
       title: "Storage",
-      icon: <FolderKey className="h-4 w-4 text-emerald-500" />,
+      icon: <FolderKey className="h-4 w-4 text-brand" />,
       features: [
         { name: "Storage included", free: "1 GB", pro: "100 GB", team: "100 GB", enterprise: "Custom" },
         { name: "Custom access controls", free: true, pro: true, team: true, enterprise: true },
@@ -58,7 +58,7 @@ export function PlanComparison() {
     },
     {
       title: "Support",
-      icon: <HelpCircle className="h-4 w-4 text-emerald-500" />,
+      icon: <HelpCircle className="h-4 w-4 text-brand" />,
       features: [
         { name: "Community Support", free: true, pro: true, team: true, enterprise: true },
         { name: "Email Support", free: false, pro: true, team: true, enterprise: true },
@@ -71,7 +71,7 @@ export function PlanComparison() {
   const renderCell = (val: string | boolean) => {
     if (typeof val === "boolean") {
       return val ? (
-        <Check className="h-4 w-4 text-emerald-500 mx-auto" />
+        <Check className="h-4 w-4 text-brand mx-auto" />
       ) : (
         <X className="h-4 w-4 text-zinc-700 mx-auto" />
       );
@@ -80,11 +80,11 @@ export function PlanComparison() {
   };
 
   return (
-    <section id="comparison-table" className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-900 scroll-mt-20">
+    <section id="comparison-table" className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-b border-panel-border scroll-mt-20">
       <div className="mx-auto max-w-5xl">
         
         {/* Header section */}
-        <div className="flex justify-between items-center mb-8 border-b border-zinc-900 pb-4">
+        <div className="flex justify-between items-center mb-8 border-b border-panel-border pb-4">
           <h2 className="text-2xl font-bold font-sans text-white tracking-tight">
             Complete Plan Comparison
           </h2>
@@ -99,13 +99,13 @@ export function PlanComparison() {
 
         {/* Feature Matrix */}
         {isExpanded && (
-          <div className="rounded-xl border border-zinc-850 bg-[#070708] overflow-hidden font-sans">
+          <div className="rounded-xl border border-card-border bg-panel-bg overflow-hidden font-sans">
             <div className="overflow-x-auto">
               <table className="w-full text-center border-collapse">
                 
                 {/* Table Head */}
                 <thead>
-                  <tr className="bg-[#0b0b0c] text-zinc-400 font-semibold border-b border-zinc-800 text-xs">
+                  <tr className="bg-card-bg text-zinc-400 font-semibold border-b border-card-border text-xs">
                     <th className="p-4 text-left w-2/5">Feature</th>
                     <th className="p-4 w-1/8">Free</th>
                     <th className="p-4 w-1/8">Pro</th>
@@ -116,12 +116,12 @@ export function PlanComparison() {
 
                 <tbody>
                   {sections.map((section, sIdx) => (
-                    <tr key={sIdx} className="divide-y divide-zinc-900">
+                    <tr key={sIdx} className="divide-y divide-panel-border">
                       <td colSpan={5} className="p-0">
                         <table className="w-full">
                           <tbody>
                             {/* Section Header Row */}
-                            <tr className="bg-[#0a0a0b]/80 border-b border-zinc-900 text-left">
+                            <tr className="bg-card-bg/80 border-b border-panel-border text-left">
                               <td colSpan={5} className="p-3 font-bold text-white text-xs flex items-center gap-2">
                                 {section.icon}
                                 <span className="uppercase tracking-wider">{section.title}</span>
@@ -132,7 +132,7 @@ export function PlanComparison() {
                             {section.features.map((feat, fIdx) => (
                               <tr
                                 key={fIdx}
-                                className="border-b border-zinc-900/60 hover:bg-zinc-950/40 transition-colors text-xs text-left"
+                                className="border-b border-panel-border/60 hover:bg-brand-glow transition-colors text-xs text-left"
                               >
                                 <td className="p-4 w-2/5 font-medium text-zinc-400">{feat.name}</td>
                                 <td className="p-4 w-1/8 text-center">{renderCell(feat.free)}</td>
