@@ -5,7 +5,6 @@ import { Check, X, ChevronDown, ChevronUp, Database, Shield, FolderKey, HelpCirc
 
 interface FeatureRow {
   name: string;
-  tooltip?: string;
   free: string | boolean;
   pro: string | boolean;
   team: string | boolean;
@@ -76,69 +75,56 @@ export function PlanComparison() {
         <X className="h-4 w-4 text-zinc-700 mx-auto" />
       );
     }
-    return <span className="text-zinc-300 text-xs font-semibold">{val}</span>;
+    return <span className="plan-matrix__cell-text">{val}</span>;
   };
 
   return (
-    <section id="comparison-table" className="bg-black py-20 px-4 sm:px-6 lg:px-8 border-b border-panel-border scroll-mt-20">
-      <div className="mx-auto max-w-5xl">
+    <section id="comparison-table" className="plan-comparison">
+      <div className="plan-comparison__inner">
         
-        {/* Header section */}
-        <div className="flex justify-between items-center mb-8 border-b border-panel-border pb-4">
-          <h2 className="text-2xl font-bold font-sans text-white tracking-tight">
-            Complete Plan Comparison
-          </h2>
+        <div className="plan-comparison__header">
+          <h2 className="plan-comparison__title">Complete Plan Comparison</h2>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-xs text-zinc-400 hover:text-white flex items-center gap-1 cursor-pointer font-semibold"
+            className="plan-matrix__expand-btn"
           >
             <span>{isExpanded ? "Hide Details" : "Show Details"}</span>
             {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </button>
         </div>
 
-        {/* Feature Matrix */}
         {isExpanded && (
-          <div className="rounded-xl border border-card-border bg-panel-bg overflow-hidden font-sans">
+          <div className="plan-matrix">
             <div className="overflow-x-auto">
-              <table className="w-full text-center border-collapse">
-                
-                {/* Table Head */}
-                <thead>
-                  <tr className="bg-card-bg text-zinc-400 font-semibold border-b border-card-border text-xs">
-                    <th className="p-4 text-left w-2/5">Feature</th>
-                    <th className="p-4 w-1/8">Free</th>
-                    <th className="p-4 w-1/8">Pro</th>
-                    <th className="p-4 w-1/8">Team</th>
-                    <th className="p-4 w-1/8">Enterprise</th>
+              <table className="plan-matrix__table">
+                <thead className="plan-matrix__thead">
+                  <tr>
+                    <th className="plan-matrix__th text-left">Feature</th>
+                    <th className="plan-matrix__th">Free</th>
+                    <th className="plan-matrix__th">Pro</th>
+                    <th className="plan-matrix__th">Team</th>
+                    <th className="plan-matrix__th">Enterprise</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   {sections.map((section, sIdx) => (
-                    <tr key={sIdx} className="divide-y divide-panel-border">
+                    <tr key={sIdx}>
                       <td colSpan={5} className="p-0">
                         <table className="w-full">
                           <tbody>
-                            {/* Section Header Row */}
-                            <tr className="bg-card-bg/80 border-b border-panel-border text-left">
-                              <td colSpan={5} className="p-3 font-bold text-white text-xs flex items-center gap-2">
+                            <tr className="plan-matrix__section-row">
+                              <td colSpan={5} className="plan-matrix__section-title">
                                 {section.icon}
-                                <span className="uppercase tracking-wider">{section.title}</span>
+                                <span>{section.title}</span>
                               </td>
                             </tr>
-                            
-                            {/* Feature Rows */}
                             {section.features.map((feat, fIdx) => (
-                              <tr
-                                key={fIdx}
-                                className="border-b border-panel-border/60 hover:bg-brand-glow transition-colors text-xs text-left"
-                              >
-                                <td className="p-4 w-2/5 font-medium text-zinc-400">{feat.name}</td>
-                                <td className="p-4 w-1/8 text-center">{renderCell(feat.free)}</td>
-                                <td className="p-4 w-1/8 text-center">{renderCell(feat.pro)}</td>
-                                <td className="p-4 w-1/8 text-center">{renderCell(feat.team)}</td>
-                                <td className="p-4 w-1/8 text-center">{renderCell(feat.enterprise)}</td>
+                              <tr key={fIdx} className="plan-matrix__feature-row">
+                                <td className="plan-matrix__feature-name">{feat.name}</td>
+                                <td className="plan-matrix__cell">{renderCell(feat.free)}</td>
+                                <td className="plan-matrix__cell">{renderCell(feat.pro)}</td>
+                                <td className="plan-matrix__cell">{renderCell(feat.team)}</td>
+                                <td className="plan-matrix__cell">{renderCell(feat.enterprise)}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -147,12 +133,10 @@ export function PlanComparison() {
                     </tr>
                   ))}
                 </tbody>
-
               </table>
             </div>
           </div>
         )}
-
       </div>
     </section>
   );

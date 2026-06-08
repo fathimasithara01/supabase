@@ -2,20 +2,20 @@
 
 export function PricingHero() {
   return (
-    <section className="relative overflow-hidden bg-black py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
-      {/* Decorative Glows & Grid */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
-      <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand/10 blur-[120px] rounded-full pointer-events-none" />
+    <section className="pricing-hero">
+      {/* Decorative Glows & Grid Backgrounds */}
+      <div className="pricing-hero__bg-grid bg-grid-pattern" />
+      <div className="pricing-hero__bg-radial bg-radial-glow" />
+      <div className="pricing-hero__glow" />
 
-      <div className="relative mx-auto max-w-5xl text-center">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-sans text-white tracking-tight leading-tight">
+      <div className="pricing-hero__inner">
+        <h1 className="pricing-hero__title">
           Predictable pricing,{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-hover">
+          <span className="pricing-cta__highlight">
             designed to scale
           </span>
         </h1>
-        <p className="mt-6 text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="pricing-hero__subtitle">
           Start building for free, collaborate with your team, then scale to millions of users.
         </p>
       </div>
