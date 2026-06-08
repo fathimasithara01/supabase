@@ -43,7 +43,7 @@ export function Footer() {
               <span className="font-bold text-white tracking-tight text-xl font-sans">
                 supabase
               </span>
-            </Link>
+            </Link> 
             <p className="text-xs text-zinc-500 leading-relaxed max-w-[200px]">
               {BRAND_TAGLINE}
             </p>

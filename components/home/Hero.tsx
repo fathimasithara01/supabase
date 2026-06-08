@@ -23,12 +23,11 @@ const COPY = {
   marqueeLabel: "Trusted by fast-growing companies worldwide",
 };
 
-export function Hero() {
-  const doubled = [...PARTNERS, ...PARTNERS];
+const DOUBLED_PARTNERS = [...PARTNERS, ...PARTNERS];
 
+export function Hero() {
   return (
     <section className="hero-section">
-      {/* Background layers */}
       <div className="hero-section__grid bg-grid-pattern" />
       <div className="hero-section__glow" />
 
@@ -42,14 +41,14 @@ export function Hero() {
         {/* Heading */}
         <h1 className="hero-heading">
           {COPY.heading[0]}
-          <span className="block mt-2">{COPY.heading[1]}</span>
+          <span className="hero-heading__line">{COPY.heading[1]}</span>
         </h1>
 
         {/* Subtitle */}
         <p className="hero-subtitle">{COPY.subtitle}</p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-16">
+        <div className="hero-cta-group">
           <Link href="#dashboard">
             <Button className="hero-cta hero-cta--primary">
               {COPY.cta.primary}
@@ -63,11 +62,11 @@ export function Hero() {
         </div>
 
         {/* Marquee */}
-        <div className="w-full max-w-5xl overflow-hidden mt-8 select-none">
+        <div className="hero-marquee-wrapper">
           <p className="hero-marquee__label">{COPY.marqueeLabel}</p>
           <div className="hero-marquee">
-            <div className="animate-marquee flex gap-12 whitespace-nowrap">
-              {doubled.map((partner, idx) => (
+            <div className="hero-marquee__track animate-marquee">
+              {DOUBLED_PARTNERS.map((partner, idx) => (
                 <div key={idx} className="hero-marquee__item">
                   <span>{partner.logo}</span>
                 </div>
